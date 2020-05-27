@@ -8,6 +8,7 @@
       :label-width="form.labelWidth ? (form.labelWidth + 'px') : ''">
       <el-input v-if="form.itemType === 'input' || form.itemType === undefined"
         v-model="params[form.modelValue]"
+        v-bind="form.additionalProps||{}"
         :size="form.size ? form.size : size"
         :readonly="form.readonly"
         :disabled="form.disabled"
@@ -15,6 +16,7 @@
         :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')" />
       <el-select v-else-if="form.itemType === 'select'"
         v-model="params[form.modelValue]"
+        v-bind="form.additionalProps||{}"
         :size="form.size ? form.size : size"
         :disabled="form.disabled"
         :placeholder="form.placeholder"
@@ -28,6 +30,7 @@
       </el-select>
       <el-date-picker v-else-if="form.itemType === 'date'"
         v-model="params[form.modelValue]"
+        v-bind="form.additionalProps||{}"
         type="date" :placeholder="form.placeholder"
         :size="form.size ? form.size : size"
         :disabled="form.disabled"
@@ -37,6 +40,7 @@
         :picker-options="form.pickerOptions || {}" />
       <el-date-picker v-else-if="form.itemType === 'daterange'"
         v-model="params[form.modelValue]"
+        v-bind="form.additionalProps||{}"
         :size="form.size ? form.size : size"
         type="daterange" @change="date => changeDate(date, form.prop[0], form.prop[1])"
         :disabled="form.disabled"
